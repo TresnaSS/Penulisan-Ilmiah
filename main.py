@@ -5,7 +5,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.stem import PorterStemmer
 import re
 import nltk
-from googletrans import Translator # type: ignore
+from googletrans import Translator
 import time
 
 st.markdown(
@@ -97,7 +97,8 @@ def predict_genre(book_summary):
     else:
 
         progress_placeholder = st.empty()
-        progress_placeholder.info("Sedang melakukan prediksi...")
+        if progress_placeholder is not None:
+            progress_placeholder.info("Sedang melakukan prediksi...")
 
         time.sleep(2)
 
