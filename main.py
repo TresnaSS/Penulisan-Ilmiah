@@ -5,7 +5,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.stem import PorterStemmer
 import re
 import nltk
-from googletrans import Translator
+from googletrans import Translator # type: ignore
 import time
 
 st.markdown(
