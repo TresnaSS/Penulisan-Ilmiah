@@ -133,9 +133,23 @@ book_summary = st.text_area("Masukkan Ringkasan Buku:")
 
 translator = Translator()
 
-def translate_to_english(text):
-    translation = translator.translate(text, dest='en')
-    return translation.text
+def translate_to_english(text, max_retries=3):
+    translation = None
+    retries = 0
+    while retries < max_retries:
+        try:
+            translation = translator.translate(text, dest='en')
+            break
+        except Exception as e:
+            st.error(f"Error: {e}. Retrying...")
+            retries += 1
+            time.sleep(1)  # Add a short delay before retrying
+    if translation:
+        return translation.text
+    else:
+        st.error("Translation failed after multiple retries.")
+        return ""
+
 
 if st.button("Terjemahkan ke Bahasa Inggris"):
     translated_summary = translate_to_english(book_summary)
